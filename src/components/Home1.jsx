@@ -2,12 +2,23 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import "../styles/Home1.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarPage from "./NavbarPage";
 import "react-slideshow-image/dist/styles.css";
-import { Fade, Zoom, Slide } from "react-slideshow-image";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 function Home1() {
   const [movies, setMovies] = useState([]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -15,7 +26,6 @@ function Home1() {
         const response = await axios.get(
           `https://api.themoviedb.org/3/discover/movie?api_key=117cdbfac10bbc3a44833dd1488f43f9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
         );
-        console.log(response.data.results);
         setMovies(response.data.results);
       } catch (error) {
         alert(error);
@@ -36,63 +46,46 @@ function Home1() {
     color: "#000000",
   };
   return (
-    <Fragment>
+    <>
       <Row>
         <Col>
           <NavbarPage />
         </Col>
       </Row>
-      <div className="slide-container">
-        <Fade>
-          {movies.map((image, index) => (
-            <div key={index}>
-              <div
+      <Slider {...settings}>
+        {movies.map((image, index) => (
+          <div key={index}>
+            <div
+              style={{
+                ...divStyle,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                display: "grid",
+                placeItems: "bottom",
+                width: "100%",
+                height: "600px",
+                marginBottom: "5px",
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0)100%),url(https://image.tmdb.org/t/p/original/${image.backdrop_path})`,
+              }}
+            >
+              <span
                 style={{
-                  ...divStyle,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  display: "grid",
-                  placeItems: "center",
-                  width: "100%",
-                  height: "500px",
-                  marginBottom: "5px",
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0)100%),url(https://image.tmdb.org/t/p/original/${image.backdrop_path})`,
+                  spanStyle,
+                  color: "White",
+                  marginTop: "200px",
+                  marginLeft: "15px",
+                  marginRight: "700px",
                 }}
               >
-                <span style={{ spanStyle, color: "White" }}>
-                  <h1>{image.title}</h1> {image.overview}
-                </span>
-              </div>
+                <h1 style={{ fontSize: "80px" }}>{image.title}</h1>
+                <p>{image.overview}</p>
+              </span>
             </div>
-          ))}
-        </Fade>
-      </div>
-      {/* {movies.map((result, index) => (
-        <>
-          <Row
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0)100%),url(https://image.tmdb.org/t/p/original/${result.backdrop_path})`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-              display: "grid",
-              placeItems: "center",
-              height: "500px",
-              marginBottom: "5px",
-            }}
-            className="img-fluid"
-          >
-            <Col className="imageDesc" style={{ width: "800px" }}>
-              <h1 className="text-light">
-                <strong>{result.title}</strong>
-              </h1>
-              <p className="text-light">{result.overview}</p>
-            </Col>
-          </Row>
-        </>
-      ))} */}
-    </Fragment>
+          </div>
+        ))}
+      </Slider>
+    </>
   );
 }
 

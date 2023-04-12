@@ -5,7 +5,7 @@ function NavbarPage() {
     <Navbar bg="transparent" expand="lg" className="fixed-top">
       <Container fluid>
         <Navbar.Brand href="/" className="text-white">
-          Movielist!
+          <div style={{fontSize:"35px"}}>Movielist!</div>
         </Navbar.Brand>
         <Navbar.Collapse
           id="navbarScroll"
@@ -16,23 +16,21 @@ function NavbarPage() {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2 bg-transparent rounded-5"
+              className="me-2 bg-transparent rounded-5 border-danger"
               aria-label="Search"
               variant="outline-danger"
-              style={{ width: "500px", color: "white" }}
             />
           </Form>
           <div className="d-flex gap-2">
             <Button
+              style={{ borderRadius: "25px", width: "100px" }}
               variant="outline-danger"
-              className="rounded-5"
-              style={{ width: "100px" }}
             >
               Login
             </Button>
             <Button
-              className="bg-danger border-0 rounded-5"
-              style={{ width: "100px" }}
+              style={{ borderRadius: "25px", width: "100px" }}
+              className="bg-danger border-0"
             >
               Register
             </Button>
