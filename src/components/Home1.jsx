@@ -13,7 +13,6 @@ function Home1() {
   const [movies, setMovies] = useState([]);
 
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -34,12 +33,6 @@ function Home1() {
     fetchAPI();
   }, []);
 
-  const divStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundSize: "cover",
-  };
   const spanStyle = {
     fontSize: "20px",
     background: "#efefef",
@@ -57,7 +50,8 @@ function Home1() {
           <div key={index}>
             <div
               style={{
-                ...divStyle,
+                alignItems: "center",
+                justifyContent: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
