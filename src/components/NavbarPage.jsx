@@ -16,14 +16,26 @@ function NavbarPage() {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2 bg-transparent"
+              className="me-2 bg-transparent rounded-5"
               aria-label="Search"
               variant="outline-danger"
+              style={{ width: "500px", color: "white" }}
             />
           </Form>
           <div className="d-flex gap-2">
-            <Button variant="outline-danger">Login</Button>
-            <Button className="bg-danger border-0">Register</Button>
+            <Button
+              variant="outline-danger"
+              className="rounded-5"
+              style={{ width: "100px" }}
+            >
+              Login
+            </Button>
+            <Button
+              className="bg-danger border-0 rounded-5"
+              style={{ width: "100px" }}
+            >
+              Register
+            </Button>
           </div>
         </Navbar.Collapse>
       </Container>
