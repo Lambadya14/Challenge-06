@@ -1,16 +1,18 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import "../styles/Home1.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarPage from "./NavbarPage";
-import "react-slideshow-image/dist/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { MdMovie } from "react-icons/md";
 
 function Home1() {
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
 
   const settings = {
     infinite: true,
@@ -64,6 +66,9 @@ function Home1() {
               }}
             >
               <span
+                onClick={() => {
+                  navigate(`/movie/${image.id}`);
+                }}
                 style={{
                   spanStyle,
                   color: "White",
@@ -74,6 +79,11 @@ function Home1() {
               >
                 <h1 style={{ fontSize: "80px" }}>{image.title}</h1>
                 <p>{image.overview}</p>
+                <Button className="bg-danger border-0 rounded-5">
+                  <h6 className="mx-1 my-2">
+                    <MdMovie /> Watch Trailer
+                  </h6>
+                </Button>
               </span>
             </div>
           </div>
