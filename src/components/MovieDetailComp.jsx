@@ -36,7 +36,6 @@ function MovieDetailComp() {
     backgroundSize: "cover",
   };
   const spanStyle = {
-    fontSize: "40px",
     background: "#efefef",
     color: "#000000",
     flex: "1",
@@ -63,7 +62,7 @@ function MovieDetailComp() {
                   display: "grid",
                   placeItems: "center",
                   width: "100%",
-                  height: "1000px",
+                  height: "910px",
                   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0)100%),url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
                 }}
               >
@@ -72,8 +71,10 @@ function MovieDetailComp() {
                   className="mx-5"
                 >
                   <Row>
-                    <Col className="col-md-6 my-2" style={{ fontSize: "80px" }}>
-                      <h1>{movie.original_title}</h1>
+                    <Col className="col-md-6 my-2">
+                      <h1 style={{ fontSize: "80px" }}>
+                        {movie.original_title}
+                      </h1>
                     </Col>
                   </Row>
                   <Row>

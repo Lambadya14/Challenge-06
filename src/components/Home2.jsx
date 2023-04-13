@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import { Row, Col, Container, Image,  } from "react-bootstrap";
+import { Row, Col, Container, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
+import { Link, Navigate } from "react-router-dom";
 
 function Home2() {
   const [movies, setMovies] = useState([]);
