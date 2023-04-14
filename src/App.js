@@ -1,7 +1,7 @@
 import Home from "./pages/Home";
 import { ToastContainer } from "react-bootstrap";
 import MovieDetail from "./pages/MovieDetail";
-import SearchMovie from "./pages/SearchMovie";
+import SearchPage from "./pages/SearchPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
-        <Route path="/search/:query" element={<SearchMovie />} />
+        <Route path="/movie/search/:name" element={<SearchPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
