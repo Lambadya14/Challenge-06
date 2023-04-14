@@ -39,7 +39,7 @@ function Home2() {
       <Row className="mt-5">
         <Col className="d-flex justify-content-between align-items-center">
           <h1>Popular Films</h1>
-          <p>See More Populars!</p>
+          <p className="me-5">See More Populars!</p>
         </Col>
       </Row>
       <Row className="mb-5">
