@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Button, Navbar, Nav, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
 function NavbarPage() {
+  const [value, setValue] = useState("");
+
   const navigate = useNavigate();
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-    const query = event.target.elements.query.value;
-    navigate("/search", { state: { query } });
+    if (value) {
+      navigate("/movie/search/" + value, { state: value, replace: true });
+    }
   };
   return (
-    <Navbar  expand="lg" className="fixed-top bg-black bg-opacity-25">
+    <Navbar bg="transparent" expand="lg" className="fixed-top">
       <Container fluid>
         <Navbar.Brand href="/" className="text-white">
           <div style={{ fontSize: "35px" }}>Movielist!</div>
@@ -24,11 +26,13 @@ function NavbarPage() {
           <Form className="d-flex " onSubmit={handleSearch}>
             <Form.Control
               type="search"
-              placeholder="What do you want to watch?"
+              placeholder="Search"
               className="me-2 bg-transparent rounded-5 border-danger"
               aria-label="Search"
               variant="outline-danger"
-              name="query"
+              style={{ color: "white" }}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
           </Form>
           <div className="d-flex gap-2">
