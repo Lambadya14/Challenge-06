@@ -1,22 +1,16 @@
-import React, { useState } from "react";
-import { Container, Button, Navbar, Nav, Form } from "react-bootstrap";
+import React, { useState, useEffect }, { useState } from "react";
+import { Container, Navbar, Nav, Form } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 function NavbarPage() {
-  const [value, setValue] = useState("");
-
-  const navigate = useNavigate();
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    if (value) {
-      navigate("/movie/search/" + value, { state: value, replace: true });
-    }
-  };
   return (
-    <Navbar bg="transparent" expand="lg" className="fixed-top">
+    <Navbar expand="lg" className="fixed-top bg-dark bg-opacity-50">
       <Container fluid>
         <Navbar.Brand href="/" className="text-white">
-          <div style={{ fontSize: "35px" }}>Movielist!</div>
+          <div style={{fontSize:"35px"}}>Movielist!</div>
         </Navbar.Brand>
         <Navbar.Collapse
           id="navbarScroll"
@@ -36,18 +30,30 @@ function NavbarPage() {
             />
           </Form>
           <div className="d-flex gap-2">
-            <Button
-              style={{ borderRadius: "25px", width: "100px" }}
-              variant="outline-danger"
-            >
-              Login
-            </Button>
-            <Button
-              style={{ borderRadius: "25px", width: "100px" }}
-              className="bg-danger border-0"
-            >
-              Register
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Nav.Item className="text-light font-weight-light d-flex align-items-center">
+                  Hi, {user?.name}
+                </Nav.Item>
+                <Nav.Item className="text-light">|</Nav.Item>
+                <Nav.Link
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    setIsLoggedIn(false);
+                    return navigate("/");
+                  }}
+                  className="text-light"
+                >
+                  Logout
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link className="text-light" as={Link} to={"/login"}>
+                  Login
+                </Nav.Link>
+              </>
+            )}
           </div>
         </Navbar.Collapse>
       </Container>

@@ -88,7 +88,7 @@ function Home1() {
                     </Row>
                     <Row>
                       <Col className="col-md-6 ">
-                        <p className="my-2">{image.overview}</p>
+                        <div className="my-2">{image.overview}</div>
                       </Col>
                     </Row>
 

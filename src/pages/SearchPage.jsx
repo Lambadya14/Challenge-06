@@ -1,11 +1,12 @@
 import React from "react";
 import Search from "../components/Search";
-import Home1 from "../components/Home1";
+import NavbarPage from "../components/NavbarPage";
 
 function SearchPage() {
   return (
     <>
-      <Home1 />
+      {/* <Home1 /> */}
+      <NavbarPage />
       <Search />
     </>
   );
