@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import NavbarPage from "../components/NavbarPage";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
   // const navigate = useNavigate();
@@ -85,6 +86,16 @@ function Login() {
                 Submit
               </Button>
             </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h4 className="text-center">Or</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            <GoogleLogin log={`Sign in`} />
           </Col>
         </Row>
       </Container>
