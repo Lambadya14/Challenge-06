@@ -1,16 +1,67 @@
-import React, { useState, useEffect }, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Navbar, Nav, Form } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { useNavigate } from "react-router-dom";
 function NavbarPage() {
+  const [user, setUser] = useState("");
+  const [value, setValue] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (value) {
+      navigate("/search/" + value, { state: value, replace: true });
+    }
+  };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsLoggedIn(true);
+      const getMe = async () => {
+        try {
+          const token = localStorage.getItem("token");
+
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_KEY}/v1/auth/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const data = response.data.data;
+
+          setUser(data);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            // If not valid token
+            if (error.response.status === 401) {
+              localStorage.removeItem("token");
+              // Temporary solution
+              return (window.location.href = "/");
+            }
+
+            toast.error(error.response.data.message);
+            return;
+          }
+          toast.error(error.message);
+        }
+      };
+
+      getMe();
+    }
+  }, []);
+
   return (
     <Navbar expand="lg" className="fixed-top bg-dark bg-opacity-50">
       <Container fluid>
-        <Navbar.Brand href="/" className="text-white">
-          <div style={{fontSize:"35px"}}>Movielist!</div>
+        <Navbar.Brand as={Link} to="/" className="text-white">
+          <div style={{ fontSize: "35px" }}>Movielist!</div>
         </Navbar.Brand>
         <Navbar.Collapse
           id="navbarScroll"
