@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import NavbarPage from "../components/NavbarPage";
-import { GoogleLogin } from "@react-oauth/google";
+import GoogleLogin from "../components/GoogleLogin";
 
 function Login() {
   // const navigate = useNavigate();

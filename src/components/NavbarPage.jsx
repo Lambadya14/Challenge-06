@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Form } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -101,9 +101,7 @@ function NavbarPage() {
             ) : (
               <>
                 <Nav.Link className="text-light" as={Link} to={"/login"}>
-                  <Button variant="danger" className="rounded-5">
-                    Login
-                  </Button>
+                  Login
                 </Nav.Link>
               </>
             )}

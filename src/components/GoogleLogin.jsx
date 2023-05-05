@@ -14,7 +14,7 @@ function GoogleLogin({ log }) {
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: `${process.env.REACT_APP_API}/v1/auth/google`,
+        url: `${process.env.REACT_APP_API_KEY}/v1/auth/google`,
         headers: {
           "Content-Type": "application/json",
         },
