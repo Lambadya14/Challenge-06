@@ -25,14 +25,7 @@ function App() {
               </Protected>
             }
           />
-          <Route
-            path="/login"
-            element={
-              <NoTokenAccess>
-                <Login />
-              </NoTokenAccess>
-            }
-          />
+
           <Route
             path="/login"
             element={

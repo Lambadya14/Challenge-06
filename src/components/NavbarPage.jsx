@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Navbar, Nav, Form } from "react-bootstrap";
+import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -86,23 +86,39 @@ function NavbarPage() {
                 <Nav.Item className="text-light font-weight-light d-flex align-items-center">
                   Hi, {user?.name}
                 </Nav.Item>
-                <Nav.Item className="text-light">|</Nav.Item>
-                <Nav.Link
+                <Nav.Item className="text-light"></Nav.Item>
+                <Button
                   onClick={() => {
                     localStorage.removeItem("token");
                     setIsLoggedIn(false);
                     return navigate("/");
                   }}
                   className="text-light"
+                  style={{ borderRadius: "25px", width: "100px" }}
+                  variant="outline-danger"
                 >
                   Logout
-                </Nav.Link>
+                </Button>
               </>
             ) : (
               <>
-                <Nav.Link className="text-light" as={Link} to={"/login"}>
+                <Button
+                  style={{ borderRadius: "25px", width: "100px" }}
+                  variant="outline-danger"
+                  className="text-light"
+                  as={Link}
+                  to={"/login"}
+                >
                   Login
-                </Nav.Link>
+                </Button>
+                <Button
+                  style={{ borderRadius: "25px", width: "100px" }}
+                  className="text-light bg-danger border-0"
+                  as={Link}
+                  to={"/register"}
+                >
+                  Register
+                </Button>
               </>
             )}
           </div>
