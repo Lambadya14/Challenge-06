@@ -3,6 +3,7 @@ import { ToastContainer } from "react-bootstrap";
 import MovieDetail from "./pages/MovieDetail";
 import SearchPage from "./pages/SearchPage";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import NoTokenAccess from "./components/NoTokenAccess";
 import Protected from "./components/Protected";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -29,6 +30,22 @@ function App() {
             element={
               <NoTokenAccess>
                 <Login />
+              </NoTokenAccess>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <NoTokenAccess>
+                <Login />
+              </NoTokenAccess>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <NoTokenAccess>
+                <Register />
               </NoTokenAccess>
             }
           />
