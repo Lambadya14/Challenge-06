@@ -1,13 +1,15 @@
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import { toast } from "react-toastify";
 import NavbarPage from "../components/NavbarPage";
 import GoogleLogin from "../components/GoogleLogin";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/actions/authActions";
 
 function Login() {
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,37 +17,12 @@ function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      let data = JSON.stringify({
-        email,
-        password,
-      });
+    let data = JSON.stringify({
+      email,
+      password,
+    });
 
-      let config = {
-        method: "post",
-        url: `${process.env.REACT_APP_API_KEY}/v1/auth/login`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-
-      const response = await axios.request(config);
-      const { token } = response.data.data;
-
-      localStorage.setItem("token", token);
-
-      // navigate("/");
-
-      // Temporary solution
-      window.location.href = "/";
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.response.data.message);
-        return;
-      }
-      toast.error(error.message);
-    }
+    dispatch(login(data, navigate));
   };
 
   return (
@@ -95,7 +72,7 @@ function Login() {
         </Row>
         <Row>
           <Col className="text-center">
-            <GoogleLogin log={`Sign in`} />
+            <GoogleLogin text={`Sign in`} />
           </Col>
         </Row>
       </Container>

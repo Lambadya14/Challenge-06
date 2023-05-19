@@ -5,7 +5,6 @@ import NavbarPage from "../components/NavbarPage";
 function SearchPage() {
   return (
     <>
-      {/* <Home1 /> */}
       <NavbarPage />
       <Search />
     </>

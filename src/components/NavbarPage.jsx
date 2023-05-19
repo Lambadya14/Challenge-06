@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Container, Navbar, Nav, Form, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getMe, logout } from "../redux/actions/authActions";
 
 function NavbarPage() {
-  const [user, setUser] = useState("");
   const [value, setValue] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   const handleSearch = (event) => {
     event.preventDefault();
     if (value) {
@@ -17,45 +17,10 @@ function NavbarPage() {
     }
   };
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    dispatch(getMe(null, null, null));
+  }, [dispatch]);
 
-    if (token) {
-      setIsLoggedIn(true);
-      const getMe = async () => {
-        try {
-          const token = localStorage.getItem("token");
-
-          const response = await axios.get(
-            `${process.env.REACT_APP_API_KEY}/v1/auth/me`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          const data = response.data.data;
-
-          setUser(data);
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            // If not valid token
-            if (error.response.status === 401) {
-              localStorage.removeItem("token");
-              // Temporary solution
-              return (window.location.href = "/");
-            }
-
-            toast.error(error.response.data.message);
-            return;
-          }
-          toast.error(error.message);
-        }
-      };
-
-      getMe();
-    }
-  }, []);
+  
 
   return (
     <Navbar expand="lg" className="fixed-top bg-dark bg-opacity-50">
@@ -89,9 +54,7 @@ function NavbarPage() {
                 <Nav.Item className="text-light"></Nav.Item>
                 <Button
                   onClick={() => {
-                    localStorage.removeItem("token");
-                    setIsLoggedIn(false);
-                    return navigate("/");
+                    dispatch(logout(navigate));
                   }}
                   className="text-light"
                   style={{ borderRadius: "25px", width: "100px" }}
